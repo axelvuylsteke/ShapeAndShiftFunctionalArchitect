@@ -7,3 +7,72 @@ info:
     name: VO Vergunningen Databank
     url: 'https://www.vlaamse-overheid.be/'
     email: vergunningen@vlaamse-overheid.be
+tags:
+  - name: Vergunningen
+servers:
+  - url: 'https://api-dev-vlaamse-overheid.be/v2'
+    description: 'DEV server'
+paths:
+  /vergunningen:
+    post:
+      operationId: postVergunningen
+      security:
+        - basicAuth: []
+      tags:
+        - Vergunningen
+      description: |-
+        Het aanmaken van een aanvraag voor een vergunning bij de Vlaamse Overheid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              required:
+                - startEvenement
+                - eindeEvenement
+                - straat
+                - nummer
+                - stad
+                - postcode
+                - bestuurNr
+                - bestuurNaam
+                - bestuurPostcode
+              properties:
+                startEvenement:
+                  type: string
+                eindeEvenement:
+                  type: string
+                straat:
+                  type: string
+                nummer:
+                  type: string
+                stad:
+                  type: string
+                postcode:
+                  type: string
+                bestuurNr:
+                  type: string
+                bestuurNaam:
+                  type: string
+                bestuurPostcode:
+                  type: string
+      responses:
+        '200':
+          description: Vergunning Aangemaakt
+          content:
+            application/json:
+              schema:
+                required:
+                - startEvenement
+                - eindeEvenement
+                - straat
+                - nummer
+                - stad
+                - postcode
+                - bestuurNr
+                - bestuurNaam
+                - bestuurPostcode
+                - resultaatBeslissing
+                - datumAanvraag
+                - datumBeslissing
+                - dossierNr
+                
