@@ -36,6 +36,15 @@ paths:
                 - bestuurNr
                 - bestuurNaam
                 - bestuurPostcode
+                - aanvragerEmail
+                - aanvragerTelefoon
+                - aanvragerRijksregisternr
+                - aanvragerVoornaam
+                - aanvragernaam
+                - aanvragerGeboortedatum
+                - aanvragerKBOnr
+                - aanvragerMaatschappelijkeNaam
+                - aanvragerVorm
               properties:
                 startEvenement:
                   type: string
@@ -55,6 +64,37 @@ paths:
                   type: string
                 bestuurPostcode:
                   type: string
+                aanvragerEmail:
+                  type: string
+                aanvragerTelefoon:
+                  type: string
+                aanvragerRijksregisternr:
+                  type: string
+                aanvragerVoornaam:
+                  type: string
+                aanvragerNaam:
+                  type: string
+                aanvragerGeboortedatum:
+                  type: string
+                aanvragerKBOnr:
+                  type: string
+                aanvragerMaatschappelijkeNaam:
+                  type: string
+                aanvragerVorm:
+                  type: string
+                ambtenaarEmail:
+                  type: string
+                ambtenaarTelefoon:
+                  type: string
+                ambtenaarRijksregisternr:
+                  type: string
+                ambtenaarVoornaam:
+                  type: string
+                ambtenaarNaam:
+                  type: string
+                ambtenaarGeboortedatum:
+                  type: string
+
       responses:
         "200":
           description: Vergunning Aangemaakt
@@ -75,6 +115,70 @@ paths:
                   - datumAanvraag
                   - datumBeslissing
                   - dossierNr
+                  - aanvragerEmail
+                  - aanvragerTelefoon
+                  - aanvragerRijksregisternr
+                  - aanvragerVoornaam
+                  - aanvragernaam
+                  - aanvragerGeboortedatum
+                  - aanvragerKBOnr
+                  - aanvragerMaatschappelijkeNaam
+                  - aanvragerVorm
+                  - ambtenaarEmail
+                  - ambtenaarTelefoon
+                  - ambtenaarVoornaam
+                  - ambtenaarNaam
+                  - ambtenaarRijksregisternr
+                  - ambtenaarGeboortedatum
+                properties:
+                  startEvenement:
+                    type: string
+                  eindeEvenement:
+                    type: string
+                  straat:
+                    type: string
+                  nummer:
+                    type: string
+                  stad:
+                    type: string
+                  postcode:
+                    type: string
+                  bestuurNr:
+                    type: string
+                  bestuurNaam:
+                    type: string
+                  bestuurPostcode:
+                    type: string
+                  aanvragerEmail:
+                    type: string
+                  aanvragerTelefoon:
+                    type: string
+                  aanvragerRijksregisternr:
+                    type: string
+                  aanvragerVoornaam:
+                    type: string
+                  aanvragerNaam:
+                    type: string
+                  aanvragerGeboortedatum:
+                    type: string
+                  aanvragerKBOnr:
+                    type: string
+                  aanvragerMaatschappelijkeNaam:
+                    type: string
+                  aanvragerVorm:
+                    type: string
+                  ambtenaarEmail:
+                    type: string
+                  ambtenaarTelefoon:
+                    type: string
+                  ambtenaarRijksregisternr:
+                    type: string
+                  ambtenaarVoornaam:
+                    type: string
+                  ambtenaarNaam:
+                    type: string
+                  ambtenaarGeboortedatum:
+                    type: string
   /vergunningen/{dossierNr}:
     get:
       operationId: getVergunningenDetails
@@ -110,3 +214,58 @@ paths:
                   - datumAanvraag
                   - datumBeslissing
                   - dossierNr
+                  - aanvragerEmail
+                  - aanvragerTelefoon
+                  - aanvragerRijksregister
+                  - aanvragerVoornaam
+                  - aanvragernaam
+                  - aanvragerGeboortedatum
+                properties:
+                  startEvenement:
+                    type: string
+                  eindeEvenement:
+                    type: string
+                  straat:
+                    type: string
+                  nummer:
+                    type: string
+                  stad:
+                    type: string
+                  postcode:
+                    type: string
+                  bestuurNr:
+                    type: string
+                  bestuurNaam:
+                    type: string
+                  bestuurPostcode:
+                    type: string
+                  aanvragerEmail:
+                    type: string
+                  aanvragerTelefoon:
+                    type: string
+                  aanvragerRijksregisternr:
+                    type: string
+                  aanvragerVoornaam:
+                    type: string
+                  aanvragerNaam:
+                    type: string
+                  aanvragerGeboortedatum:
+                    type: string
+                  aanvragerKBOnr:
+                    type: string
+                  aanvragerMaatschappelijkeNaam:
+                    type: string
+                  aanvragerVorm:
+                    type: string
+                  ambtenaarEmail:
+                    type: string
+                  ambtenaarTelefoon:
+                    type: string
+                  ambtenaarRijksregisternr:
+                    type: string
+                  ambtenaarVoornaam:
+                    type: string
+                  ambtenaarNaam:
+                    type: string
+                  ambtenaarGeboortedatum:
+                    type: string
