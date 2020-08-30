@@ -5,13 +5,13 @@ info:
   version: 1.0.0
   contact:
     name: VO Vergunningen Databank
-    url: 'https://www.vlaamse-overheid.be/'
+    url: "https://www.vlaamse-overheid.be/"
     email: vergunningen@vlaamse-overheid.be
 tags:
   - name: Vergunningen
 servers:
-  - url: 'https://api-dev-vlaamse-overheid.be/v2'
-    description: 'DEV server'
+  - url: "https://api-dev-vlaamse-overheid.be/v2"
+    description: "DEV server"
 paths:
   /vergunningen:
     post:
@@ -56,23 +56,57 @@ paths:
                 bestuurPostcode:
                   type: string
       responses:
-        '200':
+        "200":
           description: Vergunning Aangemaakt
           content:
             application/json:
               schema:
                 required:
-                - startEvenement
-                - eindeEvenement
-                - straat
-                - nummer
-                - stad
-                - postcode
-                - bestuurNr
-                - bestuurNaam
-                - bestuurPostcode
-                - resultaatBeslissing
-                - datumAanvraag
-                - datumBeslissing
-                - dossierNr
-                
+                  - startEvenement
+                  - eindeEvenement
+                  - straat
+                  - nummer
+                  - stad
+                  - postcode
+                  - bestuurNr
+                  - bestuurNaam
+                  - bestuurPostcode
+                  - resultaatBeslissing
+                  - datumAanvraag
+                  - datumBeslissing
+                  - dossierNr
+  /vergunningen/{dossierNr}:
+    get:
+      operationId: getVergunningenDetails
+      security:
+        - basicAuth: []
+      tags:
+        - Vergunningen
+      description: |-
+        Details opvragen van een bepaalde vergunning
+      parameters:
+        - in: path
+          name: dossierNr
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Vergunning
+          content:
+            application/json:
+              schema:
+                required:
+                  - startEvenement
+                  - eindeEvenement
+                  - straat
+                  - nummer
+                  - stad
+                  - postcode
+                  - bestuurNr
+                  - bestuurNaam
+                  - bestuurPostcode
+                  - resultaatBeslissing
+                  - datumAanvraag
+                  - datumBeslissing
+                  - dossierNr
