@@ -1,0 +1,9 @@
+openapi: 3.0.3
+info:
+  title: Vlaamse Overheids Vergunningen Databank
+  description: API portal om vergunningen te beheren voor evenementen
+  version: 1.0.0
+  contact:
+    name: VO Vergunningen Databank
+    url: 'https://www.vlaamse-overheid.be/'
+    email: vergunningen@vlaamse-overheid.be
