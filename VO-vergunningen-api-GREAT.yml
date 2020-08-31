@@ -1,0 +1,241 @@
+openapi: 3.0.3
+info:
+  title: Vlaamse Overheids Vergunningen Databank
+  description: API portal om vergunningen te beheren voor evenementen
+  version: 1.0.0
+  contact:
+    name: VO Vergunningen Databank
+    url: "https://www.vlaamse-overheid.be/"
+    email: vergunningen@vlaamse-overheid.be
+tags:
+  - name: Vergunningen
+servers:
+  - url: "https://api-dev-vlaamse-overheid.be/v2"
+    description: "DEV server"
+paths:
+  /vergunningen:
+    post:
+      operationId: postVergunningen
+      security:
+        - basicAuth: []
+      tags:
+        - Vergunningen
+      description: |-
+        Het aanmaken van een aanvraag voor een vergunning bij de Vlaamse Overheid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/VergunningPostRequest_V1"
+      responses:
+        "200":
+          description: Vergunning Aangemaakt
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/VergunningPostResponse_V1"
+  /vergunningen/{dossierNr}:
+    get:
+      operationId: getVergunningenDetails
+      security:
+        - basicAuth: []
+      tags:
+        - Vergunningen
+      description: |-
+        Details opvragen van een bepaalde vergunning
+      parameters:
+        - in: path
+          name: dossierNr
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Vergunning
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/VergunningGetResponse_V1"
+components:
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+  schemas:
+    VergunningPostRequest_V1:
+      type: object
+      properties:
+        evenement:
+          $ref: "#/components/schemas/VergunningEvenement_V1"
+        aanvrager:
+          $ref: "#/components/schemas/Aanvrager_V1"
+      required:
+        - evenement
+        - aanvrager
+    VergunningPostResponse_V1:
+      allOf:
+        - $ref: "#/components/schemas/Vergunning_V1"
+    VergunningGetResponse_V1:
+      allOf:
+        - $ref: "#/components/schemas/Vergunning_V1"
+    Vergunning_V1:
+      type: object
+      properties:
+        dossierNr:
+          type: string
+          format: uuid
+        datumAanvraag:
+          type: string
+          format: date
+          example: '2020-01-01'
+        datumBeslissing:
+          type: string
+          format: date
+          example: '2020-01-30'
+        resultaatBeslissing:
+          $ref: "#/components/schemas/ResultaatBeslissing_V1"
+        vergunningEvenement:
+          $ref: "#/components/schemas/VergunningEvenement_V1"
+        aanvrager:
+          $ref: "#/components/schemas/Aanvrager_V1"
+        uitvoerendAmbtenaar:
+          $ref: "#/components/schemas/UitvoerendAmbtenaar_V1"
+      required:
+        - dossierNr
+        - datumAanvraag
+        - resultaatBeslissing
+        - vergunningEvenement
+        - aanvrager
+    VergunningEvenement_V1:
+      type: object
+      properties:
+        startEvenement:
+          type: string
+          format: date-time
+          example: '2020-07-01T00:00:00.000Z'
+        eindeEvenement:
+          type: string
+          format: date-time
+          example: '2020-07-01T23:59:59.999Z'
+        lokaalBestuur:
+          $ref: "#/components/schemas/LokaalBestuur_V1"
+        adres:
+          $ref: "#/components/schemas/Adres_V1"
+      required:
+        - startEvenement
+        - eindeEvenement
+        - lokaalBestuur
+        - adres
+    Adres_V1:
+      type: object
+      properties:
+        straat:
+          type: string
+          example: 'De Schorre'
+        nummer:
+          type: string
+          example: '1'
+        postcode:
+          type: string
+          example: '2850'
+        stad:
+          type: string
+          example: 'Boom'
+      required:
+        - straat
+        - nummber
+        - postcode
+        - stad
+    LokaalBestuur_V1:
+      type: object
+      properties:
+        bestuurNummer:
+          type: string
+          format: uuid
+        bestuurNaam:
+          type: string
+          example: 'Tomorrowland NV'
+        bestuurPostcode:
+          type: string
+          example: '2850'
+      required:
+        - bestuurNummer
+        - bestuurNaam
+        - bestuurPostcode
+    Aanvrager_V1:
+      type: object
+      properties:
+        entiteit:
+          $ref: '#/components/schemas/Entiteit_V1'
+        natuurlijkePersoon:
+          $ref: '#/components/schemas/NatuurlijkePersoon_V1'
+        rechtsPersoon:
+          $ref: '#/components/schemas/RechtsPersoon_V1'
+      required:
+        - entiteit
+        - natuurlijkePersoon
+    UitvoerendAmbtenaar_V1:
+      type: object
+      properties:
+        entiteit:
+          $ref: '#/components/schemas/Entiteit_V1'
+        natuurlijkePersoon:
+          $ref: '#/components/schemas/NatuurlijkePersoon_V1'
+      required:
+        - entiteit
+        - natuurlijkePersoon
+    Entiteit_V1:
+      type: object
+      properties:
+        contactEmail:
+          type: string
+          format: email
+        contactTelefoon:
+          type: string
+          example: '+32477102030'
+      required:
+        - contactEmail
+        - contactTelefoon
+    RechtsPersoon_V1:
+      type: object
+      properties:
+        kboNummer:
+          type: string
+          format: uuid
+        maatschappelijkeNaam:
+          type: string
+          example: 'Tomorrowland NV'
+        maatschappelijkeVorm:
+          type: string
+          example: 'Naamloze Vennootschap'
+      required:
+        - kboNummber
+        - maatschappelijkeNaam
+        - maatschappelijkeVorm
+    NatuurlijkePersoon_V1:
+      type: object
+      properties:
+        rijksRegisterNummer:
+          type: string
+          example: '85.11.11-230.17'
+        voornaam:
+          type: string
+          example: 'Dimitri'
+        familienaam:
+          type: string
+          example: 'Vegas'
+        geboortedatum:
+          type: string
+          format: date
+      required:
+        - rijksRegisterNummer
+        - voornaam
+        - familienaam
+        - geboortedatum
+    ResultaatBeslissing_V1:
+      type: string
+      enum:
+        - GOEDGEKEURD
+        - AFGEWEZEN
+        - VOORBEHOUD
+      default: VOORBEHOUD
